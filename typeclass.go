@@ -6,10 +6,7 @@ package typeclass
 
 type Eq[T any] interface {
   Eq(T) bool
-}
-
-func Neq[T Eq[T]](a, b T) bool {
-  return !a.Eq(b)
+  Neq(T) bool
 }
 
 //=============================================
@@ -19,18 +16,9 @@ func Neq[T Eq[T]](a, b T) bool {
 type Ord[T any] interface {
   Eq[T]
   Lesser(T) bool
-}
-
-func Greater[T Ord[T]](a, b T) bool {
-  return !a.Lesser(b) && !a.Eq(b)
-}
-
-func Leq[T Ord[T]](a, b T) bool {
-  return a.Lesser(b) || a.Eq(b)
-}
-
-func Geq[T Ord[T]](a, b T) bool {
-  return Greater(a, b) || a.Eq(b)
+  Greater(T) bool
+  Leq(T) bool
+  Geq(T) bool
 }
 
 //=============================================
